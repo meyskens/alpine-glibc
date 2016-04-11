@@ -1,4 +1,4 @@
-# :earth_africa: alpine-glibc
+# :earth_africa: alpine-glibc [![Build Status](https://travis-ci.org/meyskens/alpine-glibc.svg?branch=master)](https://travis-ci.org/meyskens/alpine-glibc)
 
 ![](https://raw.githubusercontent.com/multiarch/dockerfile/master/logo.jpg)
 
