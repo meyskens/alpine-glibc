@@ -1,0 +1,13 @@
+sudo: required
+
+language: bash
+
+services:
+    - docker
+
+before_install:
+    - sudo apt-get -y install docker.io debootstrap qemu-user-static debootstrap
+    - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+script:
+    - sudo bash -x update.sh
+    - docker push meyskens/alpine-glibc
