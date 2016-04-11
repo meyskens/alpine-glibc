@@ -4,9 +4,7 @@
 
 Multiarch alpine images for Docker with glibc. Based on `frolvlad/alpine-glibc`'s work
 
-* https://imagelayers.io/?images=meyskens%2Falpine-glibc:armhf-edge,meyskens%2Falpine-glibc:x86-edge,meyskens%2Falpine-glibc:x86_64-edge
-
-* `multiarch/alpine` on [Docker Hub](https://hub.docker.com/r/meyskens/alpine-glibc/)
+* `meyskens/alpine-glibc` on [Docker Hub](https://hub.docker.com/r/meyskens/alpine-glibc/)
 * [Available tags](https://hub.docker.com/r/meyskens/alpine-glibc/tags/)
 
 ## Usage
