@@ -64,24 +64,7 @@ FROM scratch
 ADD rootfs.tar.xz /
 
 ENV ARCH=${ARCH} ALPINE_REL=${REL} DOCKER_REPO=${repo} ALPINE_MIRROR=${MIRROR}
-RUN ALPINE_GLIBC_BASE_URL="https://github.com/meyskens/alpine-glibc-apk/raw/master/packages/maartje/$ARCH" && \
-    ALPINE_GLIBC_PACKAGE_VERSION="2.23-r1" && \
-    ALPINE_GLIBC_BASE_PACKAGE_FILENAME="glibc-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
-    ALPINE_GLIBC_BIN_PACKAGE_FILENAME="glibc-bin-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
-    ALPINE_GLIBC_I18N_PACKAGE_FILENAME="glibc-i18n-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
-    apk add --no-cache --virtual=build-dependencies wget ca-certificates && \
-    wget -O /etc/apk/keys/maartje-570ca1b2.rsa.pub "https://raw.githubusercontent.com/meyskens/alpine-glibc-apk/master/maartje-570ca1b2.rsa.pub" && \
-    wget "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" && \
-    apk add --no-cache "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" && \
-    rm "/etc/apk/keys/maartje.rsa.pub" && \
-    /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 C.UTF-8 || true && \
-    echo "export LANG=C.UTF-8" > /etc/profile.d/locale.sh && \
-    apk del glibc-i18n && \
-    apk del build-dependencies && \
-    rm "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME"
-ENV LANG=C.UTF-8
 EOF
-
 	# add qemu-user-static binary
 	if [ -n "${qemu_arch}" ]; then
 	    cat >> Dockerfile <<EOF
@@ -90,7 +73,7 @@ EOF
 ADD x86_64_qemu-${qemu_arch}-static.tar.xz /usr/bin
 EOF
 	fi
-
+	cat glibc-install >> Dockerfile 
 	# build
 	docker build -t "${repo}:${ARCH}-${REL}" .
 	docker run --rm "${repo}:${ARCH}-${REL}" /bin/sh -ec "echo Hello from Alpine !; set -x; uname -a; cat /etc/alpine-release"
