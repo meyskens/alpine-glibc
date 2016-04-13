@@ -70,8 +70,8 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/meyskens/alpine-glibc-apk/raw/mast
     ALPINE_GLIBC_BIN_PACKAGE_FILENAME="glibc-bin-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
     ALPINE_GLIBC_I18N_PACKAGE_FILENAME="glibc-i18n-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
     apk add --no-cache --virtual=build-dependencies wget ca-certificates && \
-    wget \
-        "https://raw.githubusercontent.com/meyskens/alpine-glibc-apk/master/maartje.rsa.pub" && \
+    wget -O /etc/apk/keys/maartje-570ca1b2.rsa.pub \
+        "https://raw.githubusercontent.com/meyskens/alpine-glibc-apk/master/maartje-570ca1b2.rsa.pub" && \
     wget \
         "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
