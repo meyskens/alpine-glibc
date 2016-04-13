@@ -73,7 +73,7 @@ EOF
 ADD x86_64_qemu-${qemu_arch}-static.tar.xz /usr/bin
 EOF
 	fi
-	cat glibc-install >> Dockerfile 
+	cat ../glibc-install >> Dockerfile 
 	# build
 	docker build -t "${repo}:${ARCH}-${REL}" .
 	docker run --rm "${repo}:${ARCH}-${REL}" /bin/sh -ec "echo Hello from Alpine !; set -x; uname -a; cat /etc/alpine-release"
