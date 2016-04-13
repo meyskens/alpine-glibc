@@ -64,7 +64,7 @@ FROM scratch
 ADD rootfs.tar.xz /
 
 ENV ARCH=${ARCH} ALPINE_REL=${REL} DOCKER_REPO=${repo} ALPINE_MIRROR=${MIRROR}
-RUN ALPINE_GLIBC_BASE_URL="https://raw.githubusercontent.com/meyskens/alpine-glibc-apk/master/packages/maartje/"$ARCH && \
+RUN ALPINE_GLIBC_BASE_URL="https://github.com/meyskens/alpine-glibc-apk/raw/master/packages/maartje/"$ARCH && \
     ALPINE_GLIBC_PACKAGE_VERSION="2.23-r1" && \
     ALPINE_GLIBC_BASE_PACKAGE_FILENAME="glibc-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
     ALPINE_GLIBC_BIN_PACKAGE_FILENAME="glibc-bin-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
