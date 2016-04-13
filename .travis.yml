@@ -9,8 +9,5 @@ before_install:
     - sudo apt-get -y install docker.io debootstrap qemu-user-static debootstrap
     - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 script:
-    - docker run --rm -e STDOUT=1 meyskens/glibc-builder:amd64-latest 2.23 /usr/glibc-compat > glibc-bin-x86_64.tar.gz
-    - docker run --rm -e STDOUT=1 meyskens/glibc-builder:i386-latest 2.23 /usr/glibc-compat > glibc-bin-x86.tar.gz
-    - docker run --rm -e STDOUT=1 meyskens/glibc-builder:armhf-latest 2.23 /usr/glibc-compat > glibc-bin-armhf.tar.gz
     - sudo bash -x update.sh
     - docker push meyskens/alpine-glibc
